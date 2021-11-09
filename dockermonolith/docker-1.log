@@ -1,0 +1,6 @@
+REPOSITORY            TAG       IMAGE ID       CREATED              SIZE
+dds/ubuntu-tmp-file   latest    7a0b9e505732   About a minute ago   63.1MB
+ubuntu                18.04     5a214d77f5d7   4 weeks ago          63.1MB
+hello-world           latest    feb5d9fea6a5   5 weeks ago          13.3kB
+
+Образ - физическое представление представление контейнера на диске
