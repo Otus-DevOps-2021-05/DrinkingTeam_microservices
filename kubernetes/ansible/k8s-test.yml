@@ -1,0 +1,4 @@
+﻿- hosts: master
+  become: yes
+  tasks:
+    - debug: var=ansible_host
