@@ -2,7 +2,7 @@
 
 docker-machine create \
   --driver generic \
-  --generic-ip-address=51.250.3.40 \
+  --generic-ip-address=51.250.9.234 \
   --generic-ssh-user yc-user \
   --generic-ssh-key ~/.ssh/appuser \
   docker-host
