@@ -24,5 +24,8 @@ DrinkingTeam microservices repository
 # Дз 27
 - Развернут k8s кластер с помощью terraform и ансибл
 
+# Дз 28
+- Развернут k8s кластер и задеплоены туда микросервисы reddit
+
 # Дз 29
-- Развернут k8s кластер и задеплоины туда микросервисы reddit
+- Развернуты Ingres, network-policies, volumes
