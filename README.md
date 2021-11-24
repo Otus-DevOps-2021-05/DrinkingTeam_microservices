@@ -29,3 +29,6 @@ DrinkingTeam microservices repository
 
 # Дз 29
 - Развернуты Ingres, network-policies, volumes
+
+# Дз 30
+- Приложение описано в терминах helm, развернут гитлаб
