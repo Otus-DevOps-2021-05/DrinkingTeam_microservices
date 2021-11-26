@@ -14,3 +14,6 @@ DrinkingTeam microservices repository
 
 # Дз 20
 - Установлен gitlab и настроена непрерывная поставка ПО
+
+# Дз 22
+- Прикручен прометеус
