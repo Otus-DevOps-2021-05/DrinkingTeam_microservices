@@ -17,3 +17,6 @@ DrinkingTeam microservices repository
 
 # Дз 22
 - Прикручен прометеус
+
+# Дз 25
+- Добавлена обработка логов микросервисов: elastic, kibana, fluentd, zipkin
