@@ -2,10 +2,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mongo
+  name: mongo-gce-pd-storage# mongo
   labels:
     app: reddit
     component: mongo
+    post-db: "true"
     comment-db: "true"
 spec:
   replicas: 1
@@ -19,6 +20,7 @@ spec:
       labels:
         app: reddit
         component: mongo
+        post-db: "true"
         comment-db: "true"
     spec:
       containers:
@@ -27,6 +29,10 @@ spec:
         volumeMounts:
         - name: mongo-persistent-storage
           mountPath: /data/db
+#      volumes:
+#      - name: mongo-persistent-storage
+#        emptyDir: {}
       volumes:
       - name: mongo-persistent-storage
-        emptyDir: {}
+        persistentVolumeClaim:
+          claimName: mongo-pvc
