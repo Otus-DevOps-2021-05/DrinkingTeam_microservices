@@ -20,3 +20,6 @@ DrinkingTeam microservices repository
 
 # Дз 25
 - Добавлена обработка логов микросервисов: elastic, kibana, fluentd, zipkin
+
+# Дз 27
+- Развернут k8s кластер с помощью terraform и ансибл

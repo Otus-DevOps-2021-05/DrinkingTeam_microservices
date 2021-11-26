@@ -1,0 +1,100 @@
+- hosts: masters, workers
+  become: yes
+  tasks:
+    - debug: var=ansible_host
+
+    - name: update apt cache
+      apt:
+        update_cache: yes
+
+    - name: install dependencies
+      apt:
+        name: "{{ packages }}"
+        state: present
+        update_cache: yes
+      vars:
+        packages:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - software-properties-common
+          - gnupg-agent
+
+    - name: add an apt signing key for Docker
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: add apt repository for stable version
+      apt_repository:
+        repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable
+        state: present
+
+    - name: install Docker
+      apt:
+        name: "{{ packages }}"
+        state: present
+        update_cache: yes
+      vars:
+        packages:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+
+    - name: Add user to docker group
+      user:
+        name: "{{ansible_user}}"
+        group: docker
+
+    - name: create /etc/docker directory
+      become: yes
+      file:
+        path: /etc/docker
+        state: directory
+
+    - name: copy docker daemon.json file
+      become: yes
+      copy:
+        src: daemon.json
+        dest: /etc/docker/daemon.json
+
+    - name: restart docker
+      systemd:
+        daemon_reload: true
+        state: restarted
+        name: docker
+
+    - name: waiting for 10 seconds for docker daemon
+      pause:
+        seconds: 10
+
+    - name: add Kubernetes apt-key
+      apt_key:
+        url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+        state: present
+
+    - name: add Kubernetes' APT repository
+      apt_repository:
+        repo: deb http://apt.kubernetes.io/ kubernetes-xenial main
+        state: present
+        filename: "kubernetes"
+
+    - name: install kubelet
+      apt:
+        name: kubelet
+        state: present
+        update_cache: true
+
+    - name: install kubeadm
+      apt:
+        name: kubeadm
+        state: present
+
+- hosts: masters
+  become: yes
+  tasks:
+    - name: install kubectl
+      apt:
+        name: kubectl
+        state: present
+        force: yes
